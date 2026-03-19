@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naslovnica — DOM i BOM</title>
+    <!-- Zajednički stilovi projekta -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand">
+          <!-- Slika iz mape slike/ — relativna putanja od html/ -->
+          <img src="../slike/logo.svg" alt="Logo projekta" width="44" height="44" />
+          <span>DOM &amp; BOM lab</span>
+        </a>
+        <nav class="main-nav" aria-label="Glavna navigacija">
+          <a href="index.html">Naslovnica</a>
+          <a href="dom-lab.html">DOM vježba</a>
+          <a href="bom-lab.html">BOM vježba</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1>Dobrodošli u projekt</h1>
+      <p class="lead">
+        Ova web stranica demonstrira kako JavaScript komunicira s <strong>dokumentom</strong> (DOM) i s
+        <strong>preglednikom</strong> (BOM). Sadržaj ispod mijenja se u hodu — bez ponovnog učitavanja
+        cijele stranice.
+      </p>
+
+      <section class="card" aria-labelledby="clock-heading">
+        <h2 id="clock-heading">Sat i datum (BOM: <code>window</code> + <code>Date</code>)</h2>
+        <p>
+          Trenutno vrijeme: <strong id="clock-display">—</strong>
+        </p>
+        <p class="hint">
+          Unutar <code>setInterval</code> pozivamo konstruktor <code>Date</code> i ažuriramo tekst čvora
+          (<code>textContent</code>) — to je već DOM manipulacija unutar BOM konteksta vremena.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="window-heading">
+        <h2 id="window-heading">Veličina prozora (BOM: <code>window.innerWidth</code> / <code>innerHeight</code>)</h2>
+        <p>
+          Širina: <strong id="win-w">—</strong> px · Visina: <strong id="win-h">—</strong> px
+        </p>
+        <p class="hint">
+          Događaj <code>resize</code> na objektu <code>window</code> omogućuje ažuriranje pri svakoj
+          promjeni veličine prozora.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="user-heading">
+        <h2 id="user-heading">Pozdrav i spremanje imena (BOM: <code>localStorage</code> + DOM)</h2>
+        <p id="greeting-msg">Učitavam…</p>
+        <div class="row">
+          <label for="user-name">Vaše ime (sprema se u preglednik):</label>
+          <input type="text" id="user-name" name="user-name" placeholder="npr. Ana" autocomplete="name" />
+          <button type="button" id="btn-save-name">Spremi</button>
+        </div>
+        <p class="hint">
+          <code>localStorage</code> je trajno spremište u pregledniku (za tu domenu). Ostaje nakon
+          zatvaranja kartice, za razliku od <code>sessionStorage</code> koji koristimo na stranici BOM
+          vježbe.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Projektni zadatak — demonstracija DOM i BOM · <a href="../README.md">README</a></p>
+    </footer>
+
+    <!-- Zajednička skripta: označava aktivnu stavku u izborniku -->
+    <script src="../js/common.js"></script>
+    <!-- Logika ove stranice: sat, resize, localStorage -->
+    <script src="../js/index.js"></script>
+  </body>
+</html>

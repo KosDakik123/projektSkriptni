@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOM vježba — preglednik</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand">
+          <img src="../slike/logo.svg" alt="Logo projekta" width="44" height="44" />
+          <span>DOM &amp; BOM lab</span>
+        </a>
+        <nav class="main-nav" aria-label="Glavna navigacija">
+          <a href="index.html">Naslovnica</a>
+          <a href="dom-lab.html">DOM vježba</a>
+          <a href="bom-lab.html">BOM vježba</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1>BOM vježba — objekti preglednika</h1>
+      <p class="lead">
+        Prikazujemo podatke iz <code>navigator</code>, <code>screen</code>, <code>location</code> i
+        koristimo <code>history</code> te <code>sessionStorage</code>. Gumb „Osvježi podatke“ ponovno
+        čita vrijednosti u DOM bez reload-a stranice.
+      </p>
+
+      <section class="card" aria-labelledby="online-heading">
+        <h2 id="online-heading">Mreža (BOM: <code>navigator.onLine</code>)</h2>
+        <p>
+          Stanje:
+          <span id="online-status" class="status-bar">—</span>
+        </p>
+        <p class="hint">Događaji <code>online</code> i <code>offline</code> na <code>window</code> ažuriraju ovaj natpis.</p>
+      </section>
+
+      <section class="card" aria-labelledby="nav-heading">
+        <h2 id="nav-heading">Navigator</h2>
+        <dl class="kv-grid" id="navigator-info"></dl>
+      </section>
+
+      <section class="card" aria-labelledby="screen-heading">
+        <h2 id="screen-heading">Screen</h2>
+        <dl class="kv-grid" id="screen-info"></dl>
+      </section>
+
+      <section class="card" aria-labelledby="loc-heading">
+        <h2 id="loc-heading">Location</h2>
+        <dl class="kv-grid" id="location-info"></dl>
+      </section>
+
+      <section class="card" aria-labelledby="hist-heading">
+        <h2 id="hist-heading">History i navigacija</h2>
+        <p>
+          Duljina povijesti u ovoj sesiji: <strong id="hist-len">—</strong>
+        </p>
+        <div class="row">
+          <button type="button" id="btn-back" class="secondary">Natrag (history.back)</button>
+          <button type="button" id="btn-forward" class="secondary">Naprijed (history.forward)</button>
+          <button type="button" id="btn-refresh-bom">Osvježi podatke (samo ovaj panel)</button>
+        </div>
+        <p class="hint">
+          <code>history.back()</code> vraća na prethodnu stranicu u <em>istoj</em> kartici — prvo posjetite
+          druge stranice ovog projekta pa isprobajte.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="sess-heading">
+        <h2 id="sess-heading">Session storage (brojač posjeta ove stranice)</h2>
+        <p>
+          Otvorili ste ovu stranicu u ovoj sesiji: <strong id="visit-count">—</strong> puta.
+        </p>
+        <button type="button" id="btn-reset-session" class="danger">Resetiraj brojač (session)</button>
+        <p class="hint">Podatak se briše kad zatvorite karticu preglednika.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><a href="dom-lab.html">← DOM vježba</a> · <a href="index.html">Naslovnica</a></p>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/bom-lab.js"></script>
+  </body>
+</html>

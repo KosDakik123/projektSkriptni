@@ -1,0 +1,308 @@
+/* =============================================================================
+   Zajednički stilovi za cijeli projekt (sve HTML stranice u mapi html/)
+   Koristimo CSS varijable da tema bude konzistentna i laka za mijenjanje.
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
+
+:root {
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface-hover: #243044;
+  --text: #e8eef4;
+  --muted: #8b9cb3;
+  --accent: #3d9cf5;
+  --accent-dim: #2b7bc4;
+  --success: #3dd68c;
+  --warning: #f5b83d;
+  --danger: #f06b6b;
+  --radius: 12px;
+  --font: "DM Sans", system-ui, sans-serif;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  background: radial-gradient(ellipse 120% 80% at 50% -20%, #1a3352 0%, var(--bg) 55%);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* Svijetla tema — aktivira se kada <body> ima klasu .theme-light (postavlja JS na dom-lab) */
+body.theme-light {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-hover: #e8eef5;
+  --text: #1a2332;
+  --muted: #5a6b7d;
+  --shadow: 0 8px 28px rgba(26, 35, 50, 0.12);
+  background: radial-gradient(ellipse 100% 60% at 50% 0%, #d4e8ff 0%, var(--bg) 45%);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ----- Zaglavlje i navigacija ----- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 25%, transparent);
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.brand img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.main-nav a {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.main-nav a:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Aktivna stranica — klasu dodaje common.js prema putanji */
+.main-nav a.is-active {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+}
+
+/* ----- Glavni sadržaj ----- */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 3rem;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0 0 1.5rem;
+  max-width: 62ch;
+}
+
+/* Kartice za sekcije (BOM/DOM paneli) */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+}
+
+.card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Polja obrasca i gumbi */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="search"] {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--muted) 35%, transparent);
+  background: color-mix(in srgb, var(--bg) 40%, var(--surface));
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.15s, transform 0.1s;
+}
+
+button:hover {
+  background: var(--accent-dim);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.secondary {
+  background: var(--surface-hover);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--muted) 30%, transparent);
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+/* Lista zadataka (DOM lab) */
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.35rem;
+  background: color-mix(in srgb, var(--bg) 35%, var(--surface));
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--muted) 15%, transparent);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-list li span {
+  flex: 1;
+  word-break: break-word;
+}
+
+.task-list li.done span {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* BOM: prikaz ključ-vrijednost */
+.kv-grid {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  gap: 0.35rem 1rem;
+  font-size: 0.9rem;
+}
+
+.kv-grid dt {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.kv-grid dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.status-bar {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--success) 25%, transparent);
+  color: var(--success);
+}
+
+.status-bar.offline {
+  background: color-mix(in srgb, var(--warning) 28%, transparent);
+  color: var(--warning);
+}
+
+footer.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid color-mix(in srgb, var(--muted) 15%, transparent);
+}

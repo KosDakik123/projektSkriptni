@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM vježba — lista zadataka</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand">
+          <img src="../slike/logo.svg" alt="Logo projekta" width="44" height="44" />
+          <span>DOM &amp; BOM lab</span>
+        </a>
+        <nav class="main-nav" aria-label="Glavna navigacija">
+          <a href="index.html">Naslovnica</a>
+          <a href="dom-lab.html">DOM vježba</a>
+          <a href="bom-lab.html">BOM vježba</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1>DOM vježba — dinamička lista</h1>
+      <p class="lead">
+        Ovdje isključivo vježbamo <strong>DOM</strong>: kreiranje elemenata, slušanje događaja
+        (<code>addEventListener</code>), brisanje i označavanje završenih stavki — sve bez
+        osvježavanja stranice.
+      </p>
+
+      <section class="card" aria-labelledby="theme-heading">
+        <h2 id="theme-heading">Promjena izgleda (DOM: klasa na <code>&lt;body&gt;</code>)</h2>
+        <p>
+          Tema:
+          <button type="button" id="btn-theme-toggle" class="secondary">Prebaci svijetla / tamna</button>
+        </p>
+        <p class="hint">
+          JavaScript dodaje ili uklanja klasu <code>theme-light</code> na <code>document.body</code>;
+          CSS u <code>style.css</code> mijenja varijable boja.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="tasks-heading">
+        <h2 id="tasks-heading">Lista zadataka</h2>
+        <div class="row">
+          <label for="task-input">Novi zadatak:</label>
+          <input type="text" id="task-input" placeholder="Upišite zadatak i pritisnite Dodaj" />
+          <button type="button" id="btn-add-task">Dodaj</button>
+        </div>
+        <p id="task-count" class="hint" aria-live="polite">Zadataka: 0</p>
+        <ul id="task-list" class="task-list" aria-label="Lista zadataka"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><a href="index.html">← Natrag na naslovnicu</a> · <a href="bom-lab.html">BOM vježba →</a></p>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/dom-lab.js"></script>
+  </body>
+</html>
