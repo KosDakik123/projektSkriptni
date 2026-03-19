@@ -3,6 +3,8 @@
 **Predmet:** Web tehnologije (SJV)  
 **Tema:** Demonstracija rada s **DOM-om** (Document Object Model) i **BOM-om** (Browser Object Model) u čistom JavaScriptu.
 
+**Autori:** David Kos, Leon Ermakora, Mihael Jakšić
+
 ## Struktura projekta
 
 ```
