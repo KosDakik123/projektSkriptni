@@ -1,11 +1,6 @@
 /**
- * dom-lab.js — vježba isključivo nad dokumentom (DOM)
- *
- * Što pokazujemo:
- * - addEventListener za klik i tipkovnicu (Enter)
- * - document.createElement, appendChild, remove
- * - classList.toggle na body elementu (tema)
- * - dinamičko ažuriranje brojača zadataka (textContent)
+ * @fileoverview DOM vježba (html/dom-lab.html): dinamička lista, tema na body,
+ *     događaji bez reload-a.
  */
 (function () {
   "use strict";
@@ -18,20 +13,24 @@
   var taskCountEl = document.getElementById("task-count");
 
   /**
-   * Broji vidljive <li> elemente i ažurira natpis (pristupačnost: aria-live na elementu u HTML-u).
+   * Broji <li> elemente i ažurira natpis (uz aria-live u HTML-u).
    */
   function updateCount() {
-    if (!taskList || !taskCountEl) return;
+    if (!taskList || !taskCountEl) {
+      return;
+    }
     var n = taskList.querySelectorAll("li").length;
     taskCountEl.textContent = "Zadataka: " + n;
   }
 
   /**
-   * Kreira jedan redak liste s tekstom, gumbom „Gotovo“ (prekriži) i „Obriši“.
-   * Svaka stavka je zaseban čvor u stablu — klasičan DOM uzorak.
+   * Dodaje jedan zadatak: span + gumbi Gotovo / Obriši.
+   * @param {string} text Tekst stavke.
    */
   function addTask(text) {
-    if (!taskList) return;
+    if (!taskList) {
+      return;
+    }
     var li = document.createElement("li");
 
     var span = document.createElement("span");
@@ -62,15 +61,19 @@
   }
 
   function tryAddFromInput() {
-    if (!taskInput) return;
+    if (!taskInput) {
+      return;
+    }
     var t = taskInput.value.trim();
-    if (!t) return;
+    if (!t) {
+      return;
+    }
     addTask(t);
     taskInput.value = "";
     taskInput.focus();
   }
 
-  // ----- Tema: mijenjamo klasu na <body> — CSS reagira na .theme-light -----
+  // Tema: classList na document.body; CSS reagira na .theme-light.
   if (btnTheme) {
     btnTheme.addEventListener("click", function () {
       body.classList.toggle("theme-light");

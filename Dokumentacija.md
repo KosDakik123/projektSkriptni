@@ -43,7 +43,7 @@ Jedna datoteka stilova za sve stranice: varijable (`:root`), tamna/svijetla tema
 Iz `html/*.html` resursi se učitavaju relativno:
 - `../css/style.css`
 - `../js/...`
-- `../slike/logo.svg`
+- `../slike/logo.png`, `../slike/favicon.png`
 
 Ako premjestite stranice, trebate prilagoditi te putanje.
 

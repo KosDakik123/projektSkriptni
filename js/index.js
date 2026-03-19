@@ -1,12 +1,6 @@
 /**
- * index.js — logika naslovnice (html/index.html)
- *
- * Demonstracija BOM-a:
- * - window + setInterval (periodično ažuriranje sata)
- * - window + događaj resize (dimenzije prozora)
- * - localStorage (trajno spremanje imena u pregledniku)
- *
- * U svemu tome koristimo i DOM API (querySelector, textContent, addEventListener).
+ * @fileoverview Logika naslovnice (html/index.html): BOM (timer, resize,
+ *     localStorage) i osnovni DOM API.
  */
 (function () {
   "use strict";
@@ -21,8 +15,9 @@
   var btnSave = document.getElementById("btn-save-name");
 
   /**
-   * Formatira Date objekt u čitljiv niz (hr-HR lokal).
-   * Date je ugrađeni konstruktor u JavaScriptu; često se koristi zajedno s BOM timerima.
+   * Pretvara Date u lokalizirani string za prikaz sata.
+   * @param {!Date} d Trenutačno vrijeme.
+   * @return {string} Formatirani datum i vrijeme (hr-HR).
    */
   function formatClock(d) {
     return d.toLocaleString("hr-HR", {
@@ -36,15 +31,14 @@
     });
   }
 
+  /** Ažurira tekstualni prikaz sata u DOM-u. */
   function tickClock() {
     if (clockEl) {
       clockEl.textContent = formatClock(new Date());
     }
   }
 
-  /**
-   * Prikaz unutarnjih dimenzija viewporta — svojstva window.innerWidth / innerHeight.
-   */
+  /** Postavlja širinu i visinu viewporta (window.innerWidth / innerHeight). */
   function updateWindowSize() {
     if (winW && winH) {
       winW.textContent = String(window.innerWidth);
@@ -53,28 +47,33 @@
   }
 
   /**
-   * Čita ime iz localStorage i ispisuje pozdrav u DOM.
+   * Učitava ime iz localStorage i ispisuje pozdrav; prazan unos briše ključ.
    */
   function refreshGreeting() {
     var ime = localStorage.getItem(LS_KEY);
-    if (!greetingEl) return;
+    if (!greetingEl) {
+      return;
+    }
     if (ime && ime.trim()) {
       greetingEl.textContent = "Bok, " + ime.trim() + "! Lijepo vas vidjeti na projektu.";
-      if (nameInput) nameInput.value = ime.trim();
+      if (nameInput) {
+        nameInput.value = ime.trim();
+      }
     } else {
-      greetingEl.textContent = "Unesite ime ispod i kliknite Spremi — zapamtit će ga preglednik (localStorage).";
+      greetingEl.textContent =
+        "Unesite ime ispod i kliknite Spremi — zapamtit će ga preglednik (localStorage).";
     }
   }
 
-  // ----- Pokretanje sata: setInterval vraća ID timera (pripada window okolini) -----
+  // Sat: setInterval pripada window okolini (BOM).
   tickClock();
   window.setInterval(tickClock, 1000);
 
-  // ----- Dimenzije prozora pri učitavanju i pri svakom resize -----
+  // Dimenzije prozora: resize na window.
   updateWindowSize();
   window.addEventListener("resize", updateWindowSize);
 
-  // ----- Spremanje imena u localStorage -----
+  // Ime korisnika: localStorage (BOM).
   if (btnSave && nameInput) {
     btnSave.addEventListener("click", function () {
       var v = nameInput.value.trim();

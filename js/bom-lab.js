@@ -1,13 +1,6 @@
 /**
- * bom-lab.js — demonstracija BOM API-ja
- *
- * Objekti / globali u upotrebi:
- * - navigator  (informacije o pregledniku i jeziku)
- * - screen     (dimenzije zaslona)
- * - location   (URL trenutačne stranice)
- * - history    (natrag / naprijed u povijesti sesije)
- * - window     (događaji online/offline)
- * - sessionStorage (podaci samo do zatvaranja kartice)
+ * @fileoverview BOM vježba (html/bom-lab.html): navigator, screen, location,
+ *     history, sessionStorage, online/offline na window.
  */
 (function () {
   "use strict";
@@ -26,11 +19,14 @@
   var btnResetSession = document.getElementById("btn-reset-session");
 
   /**
-   * Pomoćna funkcija: ispunjava <dl> parovima dt/dd iz objekta { label: vrijednost }.
-   * Briše prethodni sadržaj — čist DOM refresh bez učitavanja stranice.
+   * Ispunjava <dl> parovima dt/dd iz mapiranja ključ → string vrijednost.
+   * @param {?HTMLElement} container Korijen liste (npr. prazan <dl>).
+   * @param {!Object<string, string>} pairs Objekt s labelama i vrijednostima.
    */
   function fillDefinitionList(container, pairs) {
-    if (!container) return;
+    if (!container) {
+      return;
+    }
     container.innerHTML = "";
     Object.keys(pairs).forEach(function (key) {
       var dt = document.createElement("dt");
@@ -42,11 +38,9 @@
     });
   }
 
-  /**
-   * Čita trenutačne BOM vrijednosti i upisuje ih u kartice na stranici.
-   */
+  /** Čita sve BOM panele i upisuje u DOM (bez reload-a stranice). */
   function refreshBomPanels() {
-    // navigator — podaci o korisničkom agentu (string koji preglednik šalje poslužitelju)
+    // navigator — user agent, jezik, platforma.
     fillDefinitionList(navEl, {
       "navigator.userAgent": navigator.userAgent,
       "navigator.language": navigator.language,
@@ -75,26 +69,33 @@
     }
 
     updateOnlineBadge();
-    /** Brojač posjeta ne diramo ovdje — samo prikazujemo spremljenu vrijednost */
+    // Brojač samo prikazujemo; povećanje je u incrementVisitOnce().
     displayVisitCount();
   }
 
+  /** Postavlja badge „Na mreži“ / „Izvan mreže“ prema navigator.onLine. */
   function updateOnlineBadge() {
-    if (!onlineStatus) return;
+    if (!onlineStatus) {
+      return;
+    }
     var ok = navigator.onLine;
     onlineStatus.textContent = ok ? "Na mreži" : "Izvan mreže";
     onlineStatus.classList.toggle("offline", !ok);
   }
 
-  /** Samo čita sessionStorage i prikazuje broj (bez povećanja) */
+  /**
+   * Čita sessionStorage i prikazuje broj posjeta (bez povećanja).
+   */
   function displayVisitCount() {
-    if (!visitEl) return;
+    if (!visitEl) {
+      return;
+    }
     var n = parseInt(sessionStorage.getItem(SESSION_KEY), 10) || 0;
     visitEl.textContent = String(n);
   }
 
   /**
-   * Povećava brojač za 1 pri svakom učitavanju BOM stranice u istoj sesiji.
+   * Povećava brojač za jedan pri svakom učitavanju ove stranice u sesiji.
    */
   function incrementVisitOnce() {
     var current = parseInt(sessionStorage.getItem(SESSION_KEY), 10) || 0;
@@ -102,9 +103,7 @@
     displayVisitCount();
   }
 
-  /**
-   * Briše brojač u sessionStorage (gumb „Resetiraj“).
-   */
+  /** Briše ključ i resetira prikaz brojača. */
   function resetVisitCount() {
     sessionStorage.removeItem(SESSION_KEY);
     displayVisitCount();

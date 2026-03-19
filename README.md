@@ -25,7 +25,8 @@ Projekt seminar/
 │   ├── dom-lab.js      ← dinamička lista zadataka (DOM)
 │   └── bom-lab.js      ← navigator, screen, location, history, sessionStorage
 └── slike/
-    └── logo.svg        ← jednostavna ilustracija (vektor)
+    ├── logo.png        ← logo u zaglavlju
+    └── favicon.png     ← ikona u kartici preglednika
 ```
 
 ## Kako pokrenuti
